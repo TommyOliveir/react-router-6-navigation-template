@@ -30,7 +30,7 @@ export default function Header() {
           to="/vans"
           style={({ isActive }) => (isActive ? activeStyle : null)}
         >
-          Vans
+          VansAnd-useSearchParams
         </NavLink>
 
         <NavLink

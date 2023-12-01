@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 
 export default function Vans() {
   const [vans, setVans] = React.useState([]);
@@ -9,12 +9,17 @@ export default function Vans() {
       .then((data) => setVans(data));
   }, []);
 
-
+  const [searchParams] = useSearchParams();
+  const typeFilter = searchParams.get("filter");
+console.log(typeof typeFilter)
+    
+  const filterVansElements = typeFilter
+    ? vans.filter((user) => user.id === Number(typeFilter))
+    : vans;
   
-  const vanElements = vans.map((van) => (
+  const vanElements = filterVansElements.map((van) => (
     <div key={van.id} className="van-tile">
       <Link to={`/vans/${van.id}`}>
-     
         <div className="van-info">
           <h3>{van.name}</h3>
         </div>

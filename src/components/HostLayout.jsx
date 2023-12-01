@@ -38,6 +38,12 @@ export default function HostLayout() {
         >
           BackLinkSample
         </NavLink>
+        <NavLink
+          to="list"
+          style={({ isActive }) => (isActive ? activeStyle : null)}
+        >
+         List
+        </NavLink>
       </nav>
       <Outlet />
     </>
