@@ -39,6 +39,12 @@ export default function Header() {
         >
           Home
         </NavLink>
+        <NavLink
+          to="useSearchParams"
+          style={({ isActive }) => (isActive ? activeStyle : null)}
+        >
+          useSearchParams
+        </NavLink>
       </nav>
     </header>
   );

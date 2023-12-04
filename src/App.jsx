@@ -17,6 +17,7 @@ import Back from "./Pages/Host/Back";
 import SampleList from "./Pages/Host/SampleList";
 import SampleListDetail from "./Pages/Host/SampleListDetail";
 import Details from "./Pages/Host/Details";
+import UseSearchParams from "./Pages/UseSearchParams";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
           <Route index element={<Home />} />
           <Route path="about" element={<About />} />
           <Route path="vans" element={<Vans />} />
+          <Route path="useSearchParams" element={<UseSearchParams/>} />
           <Route path="vans/:id" element={<VanDetail />} />
 
           <Route path="host" element={<HostLayout />}>
