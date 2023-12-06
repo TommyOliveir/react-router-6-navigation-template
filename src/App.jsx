@@ -18,6 +18,7 @@ import SampleList from "./Pages/Host/SampleList";
 import SampleListDetail from "./Pages/Host/SampleListDetail";
 import Details from "./Pages/Host/Details";
 import UseSearchParams from "./Pages/UseSearchParams";
+import LinkState from "./Pages/LinkState";
 
 function App() {
   return (
@@ -27,7 +28,8 @@ function App() {
           <Route index element={<Home />} />
           <Route path="about" element={<About />} />
           <Route path="vans" element={<Vans />} />
-          <Route path="useSearchParams" element={<UseSearchParams/>} />
+          <Route path="useSearchParams" element={<UseSearchParams />} />
+          <Route path="useSearchParams/linkState" element={<LinkState />} />
           <Route path="vans/:id" element={<VanDetail />} />
 
           <Route path="host" element={<HostLayout />}>

@@ -31,3 +31,12 @@ padding: 2em;
 .note {
   color: green;
 }
+
+.jedi.selected {
+  background-color: brown;
+}
+
+
+.sith.selected {
+  background-color: rgb(48, 165, 42);
+}
