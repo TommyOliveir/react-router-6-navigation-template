@@ -1,13 +1,17 @@
 import React from "react";
 import { Link, useSearchParams } from "react-router-dom";
+import { getVans } from "../../../api";
 
 export default function Vans() {
   const [vans, setVans] = React.useState([]);
 
   React.useEffect(() => {
-    fetch("https://jsonplaceholder.typicode.com/users")
-      .then((res) => res.json())
-      .then((data) => setVans(data));
+    async function loadVans() {
+      const data = await getVans();
+      setVans(data);
+    }
+
+    loadVans();
   }, []);
 
   const [searchParams] = useSearchParams();
