@@ -16,7 +16,7 @@ export default function Vans() {
 
   const [searchParams] = useSearchParams();
   const typeFilter = searchParams.get("filter");
-  console.log(typeof typeFilter);
+  console.log(typeFilter);
   const [selectId, setSelectId] = React.useState(null);
   console.log("id", typeof selectId);
   // const number =  1
@@ -33,6 +33,7 @@ export default function Vans() {
           <h3>{van.name}</h3>
         </div>
       </Link>
+      
     </div>
   ));
 
@@ -44,13 +45,16 @@ export default function Vans() {
   return (
     <div className="van-list-container">
       <h1>Explore our van options</h1>
+      <h4>filter by ID</h4>
       <select onChange={handleSelectChange}>
         <option value="1">1</option>
         <option value="2">2</option>
         <option value="3">3</option>
       </select>
 
-      <Link to={filterbyId}>find by ID</Link>
+      <Link to={filterbyId}>
+        <button>click to find by ID</button>
+      </Link>
       <div className="van-list">{vanElements}</div>
     </div>
   );
