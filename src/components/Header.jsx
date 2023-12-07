@@ -13,6 +13,12 @@ export default function Header() {
       </Link>
       <nav style={{ display: "flex", gap: "8px" }}>
         <NavLink
+          to="."
+          style={({ isActive }) => (isActive ? activeStyle : null)}
+        >
+          Home
+        </NavLink>
+        <NavLink
           to="/host"
           style={({ isActive }) => (isActive ? activeStyle : null)}
         >
@@ -33,12 +39,6 @@ export default function Header() {
           VansAnd-useSearchParams
         </NavLink>
 
-        <NavLink
-          to="."
-          style={({ isActive }) => (isActive ? activeStyle : null)}
-        >
-          Home
-        </NavLink>
         <NavLink
           to="useSearchParams"
           style={({ isActive }) => (isActive ? activeStyle : null)}

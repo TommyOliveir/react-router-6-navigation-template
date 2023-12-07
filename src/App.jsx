@@ -47,6 +47,7 @@ function App() {
               <Route index path="photos" element={<h1>no photos</h1>} />
             </Route>
           </Route>
+          <Route path="*" element={<h1>Page not found 404!</h1>} />
         </Route>
       </Routes>
     </BrowserRouter>
