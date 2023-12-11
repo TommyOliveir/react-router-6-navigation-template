@@ -50,13 +50,14 @@ export default function Vans() {
     setSelectId(selectedValue);
   };
 
-  if (loading) {
-    return <h1>Loading...</h1>;
-  }
+   if (loading) {
+     return <h1 aria-live="polite">Loading...</h1>;
+   }
 
-  if (error) {
-    return <h1>There was an error: {error.message}</h1>;
-  }
+   if (error) {
+     return <h1 aria-live="assertive">There was an error: {error.message}</h1>;
+   }
+
 
   return (
     <div className="van-list-container">
