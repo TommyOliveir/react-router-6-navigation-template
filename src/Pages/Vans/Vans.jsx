@@ -4,23 +4,32 @@ import { getVans } from "../../../api";
 
 export default function Vans() {
   const [vans, setVans] = React.useState([]);
-
-  React.useEffect(() => {
-    async function loadVans() {
-      const data = await getVans();
-      setVans(data);
-    }
-
-    loadVans();
-  }, []);
-
   const [searchParams] = useSearchParams();
+  const [loading, setLoading] = React.useState(false);
+  const [error, setError] = React.useState(null);
+
   const typeFilter = searchParams.get("filter");
   console.log(typeFilter);
   const [selectId, setSelectId] = React.useState(null);
   console.log("id", typeof selectId);
   // const number =  1
   const filterbyId = "?filter=" + selectId;
+
+  React.useEffect(() => {
+    async function loadVans() {
+      setLoading(true);
+      try {
+        const data = await getVans();
+        setVans(data);
+      } catch (err) {
+        setError(err);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    loadVans();
+  }, []);
 
   const filterVansElements = typeFilter
     ? vans.filter((user) => user.id === Number(typeFilter))
@@ -33,7 +42,6 @@ export default function Vans() {
           <h3>{van.name}</h3>
         </div>
       </Link>
-      
     </div>
   ));
 
@@ -42,9 +50,17 @@ export default function Vans() {
     setSelectId(selectedValue);
   };
 
+  if (loading) {
+    return <h1>Loading...</h1>;
+  }
+
+  if (error) {
+    return <h1>There was an error: {error.message}</h1>;
+  }
+
   return (
     <div className="van-list-container">
-      <h1>Explore our van options</h1>
+      <h1>Happy Path and Sad Path sample of getting Api - check code Api</h1>
       <h4>filter by ID</h4>
       <select onChange={handleSelectChange}>
         <option value="1">1</option>
