@@ -75,9 +75,17 @@ export default function Vans() {
           implementation. and api.js
         </p>
         <h2>Data Layer API Loaders and Errors</h2>
-        <p>we integrated Loader, useloaderData, errorElement, useRouteError</p>
+        <p>
+          {" "}
+          When using loaders we need to setup the createBrowserRouter. We
+          integrated Loader, useloaderData, errorElement, useRouteError
+        </p>
         <h2>Benefits of using Loader</h2>
-        <p>It will fetch the data before rendering the component or change to your desired route while using useEffect renders the component then load the api data</p>
+        <p>
+          It will fetch the data before rendering the component or change to
+          your desired route while using useEffect renders the component then
+          load the api data
+        </p>
       </div>
       <div
         className="van-list-body"
@@ -94,7 +102,6 @@ export default function Vans() {
           <button>click to find by ID</button>
         </Link>
         <div className="van-list">{vanElements}</div>
-     
       </div>
     </div>
   );
