@@ -76,7 +76,7 @@ export default function Vans() {
         </p>
         <h2>Data Layer API Loaders and Errors</h2>
         <p>
-          when using loaders we need to setup the createBrowserRouter. We
+          When using loaders we need to setup the createBrowserRouter. We
           integrated Loader, useloaderData, errorElement, useRouteError
         </p>
         <h2>Benefits of using Loader</h2>
@@ -91,6 +91,7 @@ export default function Vans() {
         style={{ padding: "20px", border: "solid 2px red", margin: "2em" }}
       >
         <h2>filter by ID</h2>
+        <p className="note">We are fetching users here actually not vans, </p>
         <select onChange={handleSelectChange}>
           <option value="1">1</option>
           <option value="2">2</option>
@@ -98,7 +99,7 @@ export default function Vans() {
         </select>
 
         <Link to={filterbyId}>
-          <button>click to find by ID</button>
+          <button>click to filter by ID</button>
         </Link>
         <div className="van-list">{vanElements}</div>
       </div>

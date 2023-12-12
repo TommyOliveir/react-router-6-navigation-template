@@ -40,3 +40,7 @@ padding: 2em;
 .sith.selected {
   background-color: rgb(48, 165, 42);
 }
+
+button {
+  padding: .2em;
+}
