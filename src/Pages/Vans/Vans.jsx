@@ -74,10 +74,10 @@ export default function Vans() {
           for retrieving API data. Please review the provided code for the API
           implementation. and api.js
         </p>
-        <h2>Data Layer API</h2>
-        <p>we integrated Loader, useloaderData</p>
+        <h2>Data Layer API Loaders and Errors</h2>
+        <p>we integrated Loader, useloaderData, errorElement, useRouteError</p>
         <h2>Benefits of using Loader</h2>
-        <p>It will fetch the data before rendering the component while using useEffect renders the component then load the api data</p>
+        <p>It will fetch the data before rendering the component or change to your desired route while using useEffect renders the component then load the api data</p>
       </div>
       <div
         className="van-list-body"
