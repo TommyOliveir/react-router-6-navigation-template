@@ -45,6 +45,13 @@ export default function Header() {
         >
           useSearchParams
         </NavLink>
+
+        <NavLink
+          to="protected"
+          style={({ isActive }) => (isActive ? activeStyle : null)}
+        >
+          ProtectedRoute
+        </NavLink>
       </nav>
     </header>
   );

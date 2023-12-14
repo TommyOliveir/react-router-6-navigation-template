@@ -11,7 +11,7 @@ import {
 } from "react-router-dom";
 import Home from "./Pages/Home";
 import About from "./Pages/About";
-import Vans, {loader as VansLoader} from "./Pages/Vans/Vans";
+import Vans, { loader as VansLoader } from "./Pages/Vans/Vans";
 import VanDetail from "./Pages/Vans/VanDetail";
 import HostLayout from "./components/HostLayout";
 import Dashboard from "./Pages/Host/Dashboard";
@@ -25,16 +25,24 @@ import Details from "./Pages/Host/Details";
 import UseSearchParams from "./Pages/UseSearchParams";
 import LinkState from "./Pages/LinkState";
 import Error from "./components/Error";
+import ProtectedRoute from "./Pages/ProtectedRoute";
+import AuthRequired from "./components/AuthRequired";
+import Login from "./components/Login"
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Layout />} errorElement={<Error />}>
       <Route index element={<Home />} />
       <Route path="about" element={<About />} />
-      <Route path="vans" element={<Vans />} loader={VansLoader}/>
+      <Route path="vans" element={<Vans />} loader={VansLoader} />
       <Route path="useSearchParams" element={<UseSearchParams />} />
       <Route path="useSearchParams/linkState" element={<LinkState />} />
       <Route path="vans/:id" element={<VanDetail />} />
+
+      <Route path="login" element={<Login />} />
+      <Route element={<AuthRequired />}>
+        <Route path="protected" element={<ProtectedRoute />} />
+      </Route>
 
       <Route path="host" element={<HostLayout />}>
         <Route index element={<Dashboard />} />
