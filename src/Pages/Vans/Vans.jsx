@@ -3,6 +3,7 @@ import { Link, useSearchParams, useLoaderData } from "react-router-dom";
 import { getVans } from "../../../api";
 
 export function loader() {
+  
   return getVans();
 }
 
@@ -14,7 +15,7 @@ export default function Vans() {
   // const [error, setError] = React.useState(null);
 
   const typeFilter = searchParams.get("filter");
-  console.log(typeFilter);
+  console.log("typeFilter", typeFilter);
   const [selectId, setSelectId] = React.useState(null);
   console.log("id", typeof selectId);
   // const number =  1
@@ -91,7 +92,7 @@ export default function Vans() {
         style={{ padding: "20px", border: "solid 2px red", margin: "2em" }}
       >
         <h2>filter by ID</h2>
-        <p className="note">We are fetching users here actually not vans, </p>
+        <p className="note">We are fetching users here actually not vans, loading data with loaders </p>
         <select onChange={handleSelectChange}>
           <option value="1">1</option>
           <option value="2">2</option>

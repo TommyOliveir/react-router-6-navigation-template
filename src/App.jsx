@@ -8,11 +8,12 @@ import {
   RouterProvider,
   createBrowserRouter,
   createRoutesFromElements,
+  redirect
 } from "react-router-dom";
 import Home from "./Pages/Home";
 import About from "./Pages/About";
 import Vans, { loader as VansLoader } from "./Pages/Vans/Vans";
-import VanDetail from "./Pages/Vans/VanDetail";
+import VanDetail, {loader as VanDetailLoader} from "./Pages/Vans/VanDetail";
 import HostLayout from "./components/HostLayout";
 import Dashboard from "./Pages/Host/Dashboard";
 import Income from "./Pages/Host/Income";
@@ -28,6 +29,7 @@ import Error from "./components/Error";
 import ProtectedRoute from "./Pages/ProtectedRoute";
 import AuthRequired from "./components/AuthRequired";
 import Login from "./components/Login"
+import ProtectedRouteWithLoaders from "./Pages/ProtectedRouteWithLoaders";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -37,12 +39,24 @@ const router = createBrowserRouter(
       <Route path="vans" element={<Vans />} loader={VansLoader} />
       <Route path="useSearchParams" element={<UseSearchParams />} />
       <Route path="useSearchParams/linkState" element={<LinkState />} />
-      <Route path="vans/:id" element={<VanDetail />} />
-
+      <Route path="vans/:id" element={<VanDetail />} loader={VanDetailLoader} />
       <Route path="login" element={<Login />} />
+      {/* AuthRequired is like a layout with outlet inside/ nested route */}
       <Route element={<AuthRequired />}>
         <Route path="protected" element={<ProtectedRoute />} />
       </Route>
+
+      <Route
+        path="protectedWithLoaders"
+        element={<ProtectedRouteWithLoaders />}
+        loader={async () => {
+          const isLoggedIn = false;
+          if (!isLoggedIn) {
+            throw redirect("/login");
+          }
+          return null;
+        }}
+      />
 
       <Route path="host" element={<HostLayout />}>
         <Route index element={<Dashboard />} />
@@ -52,6 +66,7 @@ const router = createBrowserRouter(
         <Route path="backlinksample" element={<BackLinkSample />}>
           <Route path="back" element={<Back />} />
         </Route>
+
         <Route path="list" element={<SampleList />} />
         <Route path="list/:id" element={<SampleListDetail />}>
           <Route index element={<Details />} />

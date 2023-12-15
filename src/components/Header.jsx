@@ -52,6 +52,12 @@ export default function Header() {
         >
           ProtectedRoute
         </NavLink>
+        <NavLink
+          to="protectedWithLoaders"
+          style={({ isActive }) => (isActive ? activeStyle : null)}
+        >
+          ProtectedRouteWithLoaders
+        </NavLink>
       </nav>
     </header>
   );
