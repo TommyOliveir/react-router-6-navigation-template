@@ -1,9 +1,16 @@
 import React from "react";
 import { Link, useSearchParams, useLoaderData } from "react-router-dom";
 import { getVans } from "../../../api";
+// import { requireAuth } from "../../utils";
+
+
+//* NOTE: if you want to hide users if not login/ with authentication
+// export async function loader() {
+//   await requireAuth()
+//   return getVans();
+// }
 
 export function loader() {
-  
   return getVans();
 }
 

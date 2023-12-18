@@ -8,12 +8,12 @@ import {
   RouterProvider,
   createBrowserRouter,
   createRoutesFromElements,
-  redirect
+  // redirect
 } from "react-router-dom";
 import Home from "./Pages/Home";
 import About from "./Pages/About";
 import Vans, { loader as VansLoader } from "./Pages/Vans/Vans";
-import VanDetail, {loader as VanDetailLoader} from "./Pages/Vans/VanDetail";
+import VanDetail, { loader as VanDetailLoader } from "./Pages/Vans/VanDetail";
 import HostLayout from "./components/HostLayout";
 import Dashboard from "./Pages/Host/Dashboard";
 import Income from "./Pages/Host/Income";
@@ -28,8 +28,9 @@ import LinkState from "./Pages/LinkState";
 import Error from "./components/Error";
 import ProtectedRoute from "./Pages/ProtectedRoute";
 import AuthRequired from "./components/AuthRequired";
-import Login from "./components/Login"
+import Login, { loginLoader } from "./components/Login";
 import ProtectedRouteWithLoaders from "./Pages/ProtectedRouteWithLoaders";
+import { requireAuth } from "./utils";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -40,7 +41,7 @@ const router = createBrowserRouter(
       <Route path="useSearchParams" element={<UseSearchParams />} />
       <Route path="useSearchParams/linkState" element={<LinkState />} />
       <Route path="vans/:id" element={<VanDetail />} loader={VanDetailLoader} />
-      <Route path="login" element={<Login />} />
+      <Route path="login" element={<Login />} loader={loginLoader}/>
       {/* AuthRequired is like a layout with outlet inside/ nested route */}
       <Route element={<AuthRequired />}>
         <Route path="protected" element={<ProtectedRoute />} />
@@ -49,14 +50,23 @@ const router = createBrowserRouter(
       <Route
         path="protectedWithLoaders"
         element={<ProtectedRouteWithLoaders />}
+        // loader={async () => {
+        //   const isLoggedIn = false
+        //   if (!isLoggedIn) {
+        //     throw redirect("/login");
+        //   }
+        //   return null;
+        // }}
         loader={async () => {
-          const isLoggedIn = false;
-          if (!isLoggedIn) {
-            throw redirect("/login");
-          }
-          return null;
+          await requireAuth();
+          return null; 
         }}
-      />
+      >
+        <Route
+          path="nestedProtectedWithLoaders"
+          element={<h1>Nested protectedRoute with loaders</h1>}
+        />
+      </Route>
 
       <Route path="host" element={<HostLayout />}>
         <Route index element={<Dashboard />} />

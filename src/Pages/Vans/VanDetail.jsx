@@ -1,16 +1,16 @@
-
-import {  useLoaderData } from "react-router-dom";
+import { useLoaderData } from "react-router-dom";
 import { getVans } from "../../../api";
 
+//params alternative to useParams in loader
 export function loader({ params }) {
-  console.log(params);
+  console.log('params',params);
   return getVans(params.id);
 }
 
 export default function VanDetail() {
   // const params = useParams();
   // const [van, setVan] = React.useState(null);
-    const van = useLoaderData();
+  const van = useLoaderData();
 
   // React.useEffect(() => {
   //   fetch(`https://jsonplaceholder.typicode.com/users/${params.id}`)
@@ -22,7 +22,6 @@ export default function VanDetail() {
     <div className="van-detail-container">
       {van ? (
         <div className="van-detail">
-         
           <h2>{van.username}</h2>
 
           <p>{van.id}</p>

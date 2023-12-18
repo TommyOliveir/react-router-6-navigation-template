@@ -15,7 +15,7 @@
 
 export async function getVans(id) {
   const url = id
-    ? `https://jsonplaceholder.typicode.com/users${id}`
+    ? `https://jsonplaceholder.typicode.com/users/${id}`
     : "https://jsonplaceholder.typicode.com/users";
   const res = await fetch(url);
   if (!res.ok) {
