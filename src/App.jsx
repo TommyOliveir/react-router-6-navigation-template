@@ -29,6 +29,10 @@ import Error from "./components/Error";
 import ProtectedRoute from "./Pages/ProtectedRoute";
 import AuthRequired from "./components/AuthRequired";
 import Login, { loginLoader } from "./components/Login";
+import LoginWithAction, {
+  loader as loginWithActionLoader,
+  action as loginWithAction,
+} from "./components/LoginWithAction";
 import ProtectedRouteWithLoaders from "./Pages/ProtectedRouteWithLoaders";
 import { requireAuth } from "./utils";
 
@@ -41,7 +45,13 @@ const router = createBrowserRouter(
       <Route path="useSearchParams" element={<UseSearchParams />} />
       <Route path="useSearchParams/linkState" element={<LinkState />} />
       <Route path="vans/:id" element={<VanDetail />} loader={VanDetailLoader} />
-      <Route path="login" element={<Login />} loader={loginLoader}/>
+      <Route path="login" element={<Login />} loader={loginLoader} />
+      <Route
+        path="loginWithAction"
+        loader={loginWithActionLoader}
+        action={loginWithAction}
+        element={<LoginWithAction />}
+      />
       {/* AuthRequired is like a layout with outlet inside/ nested route */}
       <Route element={<AuthRequired />}>
         <Route path="protected" element={<ProtectedRoute />} />
@@ -59,7 +69,7 @@ const router = createBrowserRouter(
         // }}
         loader={async () => {
           await requireAuth();
-          return null; 
+          return null;
         }}
       >
         <Route

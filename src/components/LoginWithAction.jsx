@@ -1,20 +1,26 @@
-import { useLoaderData, useLocation, useNavigate } from "react-router-dom";
-import { useState } from "react";
-import { loginUser } from "../utils";
+import { useLoaderData, useLocation,  Form } from "react-router-dom";
+
 // import { useSearchParams } from "react-router-dom";
 
 // NOTE: alternative solution, use search params to get query to display message pass from requiredAuth
 
 //native wev
-export function loginLoader({ request }) {
+export function loader({ request }) {
   return new URL(request.url).searchParams.get("message");
 }
 
+
+export async function action({request}) {
+    const formData = await request.formData();
+    const email = formData.get("email");
+    const password = formData.get("password");
+    // process this info however I wanted
+    // pass the email and password to the loginUser function
+    console.log(email, password);
+  return null;
+}
+
 function Login() {
-  const [loginFormData, setLoginFormData] = useState({
-    email: "",
-    password: "",
-  });
   // const [status, setStatus] = useState("idle");
   const location = useLocation();
   const message = location.state?.message;
@@ -22,48 +28,13 @@ function Login() {
   // console.log(searchParams.get("message"))
 
   const messageUsingLoader = useLoaderData();
-  const navigate = useNavigate();
 
-  async function handleSubmit(e) {
-    e.preventDefault();
-    // setStatus("submitting");
-    console.log(loginFormData);
-    const isUserLoggedIn = await loginUser(loginFormData);
-    if (isUserLoggedIn) {
-      navigate("/host", { replace: true });
-    } 
-  }
-
-//NOTE: usually you submit post when submit login to API
-
-// export async function loginUser(creds) {
-//   const res = await fetch("/api/login", {
-//     method: "post",
-//     body: JSON.stringify(creds),
-//   });
-//   const data = await res.json();
-
-//   if (!res.ok) {
-//     throw {
-//       message: data.message,
-//       statusText: res.statusText,
-//       status: res.status,
-//     };
-//   }
-
-//   return data;
-// }
-
-  function handleChange(e) {
-    const { name, value } = e.target;
-    setLoginFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  }
 
   return (
     <div>
+      <h1>Login using Form and 
+        action
+      </h1>
       <h2>Description</h2>
       <p>
         we display a message when displaying login page and we got two solutions
@@ -87,27 +58,27 @@ function Login() {
 
       <div className="login-container">
         <h1>Sign in to your account</h1>
-        {/* Warning goes here. Give it a classname="red" */}
-        <form onSubmit={handleSubmit} className="login-form">
+        {/*mothod post need to be fake */}
+        <Form method='POST' className="login-form">
           <input
             name="email"
-            onChange={handleChange}
+            
             type="email"
             placeholder="Email address"
-            value={loginFormData.email}
+           
           />
           <input
             name="password"
-            onChange={handleChange}
+         
             type="password"
             placeholder="Password"
-            value={loginFormData.password}
+  
           />
           <button disabled={status === "submitting"}>
             {" "}
             {status === "submitting" ? "Logging in..." : "Log in"}
           </button>
-        </form>
+        </Form>
       </div>
     </div>
   );
