@@ -21,7 +21,7 @@ export async function requireAuth() {
 
 export async function loginUser(user) {
   const credentials = {
-    email: "tommy@gmail.com",
+    email: "tom@gmail.com",
     password: "123",
   };
 

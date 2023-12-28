@@ -1,4 +1,5 @@
-import { useLoaderData, useLocation,  Form } from "react-router-dom";
+import { useLoaderData, useLocation,  Form, redirect } from "react-router-dom";
+import { loginUser } from "../utils";
 
 // import { useSearchParams } from "react-router-dom";
 
@@ -16,8 +17,11 @@ export async function action({request}) {
     const password = formData.get("password");
     // process this info however I wanted
     // pass the email and password to the loginUser function
-    console.log(email, password);
-  return null;
+    console.log('email:',email, 'password:',password);
+    const isUserLoggedIn = await loginUser({ email, password });
+    if (isUserLoggedIn) {
+      throw redirect('/host')
+    } return null;
 }
 
 function Login() {
