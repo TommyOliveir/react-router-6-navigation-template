@@ -35,6 +35,7 @@ import LoginWithAction, {
 } from "./components/LoginWithAction";
 import ProtectedRouteWithLoaders from "./Pages/ProtectedRouteWithLoaders";
 import { requireAuth } from "./utils";
+import { AuthProvider } from "./loggedInContext";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -100,7 +101,11 @@ const router = createBrowserRouter(
 );
 
 function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <AuthProvider>
+      <RouterProvider router={router} />;
+    </AuthProvider>
+  );
 }
 
 export default App;

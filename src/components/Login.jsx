@@ -1,6 +1,8 @@
-import { useLoaderData, useLocation, useNavigate } from "react-router-dom";
+import { useLoaderData, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { loginUser } from "../utils";
+import { useAuth } from "../loggedInContext";
 // import { useSearchParams } from "react-router-dom";
 
 // NOTE: alternative solution, use search params to get query to display message pass from requiredAuth
@@ -24,35 +26,40 @@ function Login() {
   const messageUsingLoader = useLoaderData();
   const navigate = useNavigate();
 
+  const { login } = useAuth();
+
   async function handleSubmit(e) {
     e.preventDefault();
     // setStatus("submitting");
     console.log(loginFormData);
     const isUserLoggedIn = await loginUser(loginFormData);
     if (isUserLoggedIn) {
-      navigate("/host", { replace: true });
-    } 
+      // Redirect to the desired page after successful login
+      console.log("Login successful. Redirecting to /host");
+      login();
+      navigate("/protected", { replace: true });
+    }
   }
 
-//NOTE: usually you submit post when submit login to API
+  //NOTE: usually you submit post when submit login to API
 
-// export async function loginUser(creds) {
-//   const res = await fetch("/api/login", {
-//     method: "post",
-//     body: JSON.stringify(creds),
-//   });
-//   const data = await res.json();
+  // export async function loginUser(creds) {
+  //   const res = await fetch("/api/login", {
+  //     method: "post",
+  //     body: JSON.stringify(creds),
+  //   });
+  //   const data = await res.json();
 
-//   if (!res.ok) {
-//     throw {
-//       message: data.message,
-//       statusText: res.statusText,
-//       status: res.status,
-//     };
-//   }
+  //   if (!res.ok) {
+  //     throw {
+  //       message: data.message,
+  //       statusText: res.statusText,
+  //       status: res.status,
+  //     };
+  //   }
 
-//   return data;
-// }
+  //   return data;
+  // }
 
   function handleChange(e) {
     const { name, value } = e.target;
