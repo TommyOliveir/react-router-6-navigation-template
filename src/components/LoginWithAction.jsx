@@ -63,7 +63,7 @@ function Login() {
       <div className="login-container">
         <h1>Sign in to your account</h1>
         {/*mothod post need to be fake */}
-        <Form method='POST' className="login-form">
+        <Form method='POST' className="login-form" replace>
           <input
             name="email"
             
